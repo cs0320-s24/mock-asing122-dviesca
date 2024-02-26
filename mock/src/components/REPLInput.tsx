@@ -1,7 +1,7 @@
 import "../styles/main.css";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ControlledInput } from "./ControlledInput";
-import "MockedJSON.ts";
+import { moviesCSV, tvCSV } from "./MockedJSON";
 
 const CSVmap: Map<string, string[][]> = new Map([
   ["movies.csv", moviesCSV],
@@ -26,9 +26,9 @@ export function REPLInput(props: REPLInputProps) {
   function handleSubmit() {
     var splitCommand: string[] = commandString.split(" ");
     if (splitCommand.length != 0) {
-      props.setCommandHistory([...props.commandHistory, splitCommand[0]]);
       if (splitCommand[0] == "load") {
-        props.setHistory([...props.history, loadCSV(props, splitCommand[1])]);
+        var loadSuccess = loadCSV(props, splitCommand[1]);
+        props.setHistory([...props.history, loadSuccess]);
       } else if (splitCommand[0] == "view") {
       }
     }

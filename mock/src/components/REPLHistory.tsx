@@ -11,17 +11,14 @@ export function REPLHistory(props: REPLHistoryProps) {
     <div className="repl-history">
       {/* This is where command history will go */}
       {/* TODO: To go through all the pushed commands... try the .map() function! */}
-      {props.history.map((h, index) => (
-        <p>{h}</p>
-      ))}
-      {props.modeBrief && props.history.map((hist) => <p>{hist}</p>)}
-      {!props.modeBrief &&
-        props.commandHistory.map((cmd, index) => (
-          <div>
-            <p>Command: {cmd}</p>
-            <p>Output: {props.history[index]}</p>
-          </div>
-        ))}
+      {props.modeBrief
+        ? props.history.map((hist) => <p>{hist}</p>)
+        : props.commandHistory.map((cmd, index) => (
+            <div>
+              <p>Command: {cmd}</p>
+              <p>Output: {props.history[index]}</p>
+            </div>
+          ))}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-const moviesCSV = [
+export const moviesCSV = [
   ["Movie title", "Director", "Year", "IMDB"],
   ["Social Network", "David Fincher", "2010", "7.8"],
   ["Eternal Sunshine of the Spotless Mind", "Michel Gondry", "2004", "8.3"],
@@ -7,7 +7,7 @@ const moviesCSV = [
   ["The Trial of the Chicago 7", "Aaron Sorkin", "2020", "7.7"],
 ];
 
-const tvCSV = [
+export const tvCSV = [
   ["TV show", "Year started", "Year ended"], // '-' for ongoing shows
   ["Seinfeld", "1989", "1998"],
   ["Veep", "2012", "2019"],
