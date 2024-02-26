@@ -1,26 +1,38 @@
 import "../styles/main.css";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ControlledInput } from "./ControlledInput";
+import "MockedJSON.ts";
+
+const CSVmap: Map<string, string[][]> = new Map([
+  ["movies.csv", moviesCSV],
+  ["tv.csv", tvCSV],
+]);
 
 interface REPLInputProps {
   // TODO: Fill this with desired props... Maybe something to keep track of the submitted commands
   history: string[];
   setHistory: Dispatch<SetStateAction<string[]>>;
+  commandHistory: string[];
+  setCommandHistory: Dispatch<SetStateAction<string[]>>;
+  functionMap: Map<string, () => string>;
+  file: string[][];
+  setFile: Dispatch<SetStateAction<string[][]>>;
 }
 // You can use a custom interface or explicit fields or both! An alternative to the current function header might be:
 // REPLInput(history: string[], setHistory: Dispatch<SetStateAction<string[]>>)
 export function REPLInput(props: REPLInputProps) {
-  // Remember: let React manage state in your webapp.
-  // Manages the contents of the input box
   const [commandString, setCommandString] = useState<string>("");
-  // TODO WITH TA : add a count state
-  const [count, setCount] = useState<number>(0);
-  // TODO WITH TA: build a handleSubmit function called in button onClick
-  // TODO: Once it increments, try to make it push commands... Note that you can use the `...` spread syntax to copy what was there before
-  // add to it with new commands.
+
   function handleSubmit() {
-    setCount(count + 1);
-    props.setHistory([...props.history, commandString]);
+    var splitCommand: string[] = commandString.split(" ");
+    if (splitCommand.length != 0) {
+      props.setCommandHistory([...props.commandHistory, splitCommand[0]]);
+      if (splitCommand[0] == "load") {
+        props.setHistory([...props.history, loadCSV(props, splitCommand[1])]);
+      } else if (splitCommand[0] == "view") {
+      }
+    }
+    props.setCommandHistory([...props.commandHistory, commandString]);
   }
   /**
    * We suggest breaking down this component into smaller components, think about the individual pieces
@@ -40,9 +52,16 @@ export function REPLInput(props: REPLInputProps) {
           ariaLabel={"Command input"}
         />
       </fieldset>
-      {/* TODO WITH TA: Build a handleSubmit function that increments count and displays the text in the button */}
-      {/* TODO: Currently this button just counts up, can we make it push the contents of the input box to the history?*/}
-      <button onClick={handleSubmit}>Submit {count} times</button>
+      <button onClick={handleSubmit}>Submit</button>
     </div>
   );
+}
+
+function loadCSV(props: REPLInputProps, fileName: string) {
+  props.setFile(CSVmap.get(fileName) || [[]]);
+  if (props.file.length != 0) {
+    return "File successfully loaded.";
+  } else {
+    return "Error: unable to load file.";
+  }
 }
