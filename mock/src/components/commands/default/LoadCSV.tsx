@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { REPLFunction } from "../REPLFunction";
-import { CSVmap } from "../../REPLInput";
+import { CSVmap } from "../../mocked/CSVMap";
 
 interface REPLFunctionProps {
   file: string[][];

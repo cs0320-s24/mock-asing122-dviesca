@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { REPLFunction } from "../REPLFunction";
-import { searchQueries } from "../../REPLInput";
+import { searchQueries } from "../../mocked/searchQueries";
 
 interface REPLFunctionProps {
   file: string[][];

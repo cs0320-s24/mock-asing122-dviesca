@@ -1,7 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
 import { REPLFunction } from "../REPLFunction";
-import { searchCSVByColName } from "./SearchCSVByColName";
-import { searchCSVByIndex } from "./SearchCSVByIndex";
 
 interface REPLFunctionProps {
   file: string[][];
