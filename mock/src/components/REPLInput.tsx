@@ -50,24 +50,53 @@ export function REPLInput(props: REPLInputProps) {
     var splitCommand: string[] = commandString.split(" ");
     if (splitCommand.length != 0) {
       if (splitCommand[0] == "load_file") {
-        props.setHistory([...props.history, loadCSV(props, splitCommand[1])]);
-      } else if (splitCommand[0] == "view") {
-        props.setHistory([...props.history, viewCSV(props)]);
-      } else if (splitCommand[0] == "search") {
-        var val = Number(splitCommand[1]);
-        /*if (/^[0-9]*$/.test(val)) {
-          searchCSVByIndex(props, );
-        }*/
-        if (!isNaN(val)) {
-          props.setHistory([
-            ...props.history,
-            searchCSVByIndex(props, val, splitCommand[2]),
-          ]);
+        var searchFields = commandString
+          .split(/<|>/)
+          .filter((val) => val != "" && val != " ")
+          .map((v) => v.trim());
+        if (searchFields.length == 2) {
+          props.setHistory([...props.history, loadCSV(props, searchFields[1])]);
         } else {
           props.setHistory([
             ...props.history,
-            searchCSVByColName(props, splitCommand[1], splitCommand[2]),
+            "Error: invalid load; incorrect number of arguments.",
           ]);
+        }
+      } else if (commandString == "view") {
+        props.setHistory([...props.history, viewCSV(props)]);
+      } else if (splitCommand[0] == "search") {
+        var searchFields = commandString
+          .split(/<|>/)
+          .filter((val) => val != "" && val != " ")
+          .map((v) => v.trim());
+        if (searchFields.length == 3) {
+          var val = Number(splitCommand[1]);
+          if (!isNaN(val)) {
+            props.setHistory([
+              ...props.history,
+              searchCSVByIndex(props, val, searchFields[2]),
+            ]);
+          } else {
+            props.setHistory([
+              ...props.history,
+              searchCSVByColName(props, searchFields[1], searchFields[2]),
+            ]);
+          }
+        } else {
+          props.setHistory([
+            ...props.history,
+            "Error: invalid search; incorrect number of arguments.",
+          ]);
+        }
+      } else if (splitCommand[0] == "mode") {
+        if (splitCommand[1] == "brief") {
+          props.setModeBrief(true);
+          props.setHistory([...props.history, "Mode switched to brief."]);
+        } else if (splitCommand[1] == "verbose") {
+          props.setModeBrief(false);
+          props.setHistory([...props.history, "Mode switched to verbose."]);
+        } else {
+          props.setHistory([...props.history, "Error: invalid mode switch."]);
         }
       }
     }
@@ -103,7 +132,7 @@ function loadCSV(props: REPLInputProps, fileName: string) {
   if (file.length > 1) {
     return "File successfully loaded.";
   } else {
-    return "Error: unable to load file.";
+    return "Error: unable to load file; invalid file path.";
   }
 }
 
@@ -116,7 +145,7 @@ function viewCSV(props: REPLInputProps) {
     });
     return returnVal;
   } else {
-    return "Error: No file found.";
+    return "Error: unable to view; no file found.";
   }
 }
 
@@ -125,23 +154,29 @@ function searchCSVByColName(
   column: string,
   val: string
 ) {
-  var returnVal = "";
-  var results = searchQueries.get(column + "," + val) || [[]];
-  results.map((row) => {
-    row.map((val) => {
-      returnVal += "##" + val;
+  if (props.file.length > 1) {
+    var returnVal = "";
+    var results = searchQueries.get(column + "," + val) || [[]];
+    results.map((row) => {
+      row.map((val) => (returnVal += "##" + val));
+      returnVal += "###";
     });
-    returnVal += "###";
-  });
-  return returnVal;
+    return returnVal;
+  } else {
+    return "Error: unable to search; no file found.";
+  }
 }
 
 function searchCSVByIndex(props: REPLInputProps, index: number, val: string) {
-  var returnVal = "";
-  var results = searchQueries.get(index.toString() + "," + val) || [[]];
-  results.map((row) => {
-    row.map((val) => (returnVal += "##" + val));
-    returnVal += "###";
-  });
-  return returnVal;
+  if (props.file.length > 1) {
+    var returnVal = "";
+    var results = searchQueries.get(index.toString() + "," + val) || [[]];
+    results.map((row) => {
+      row.map((val) => (returnVal += "##" + val));
+      returnVal += "###";
+    });
+    return returnVal;
+  } else {
+    return "Error: unable to search; no file found.";
+  }
 }
