@@ -1,7 +1,7 @@
 import "../styles/main.css";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ControlledInput } from "./ControlledInput";
-import { REPLFunction } from "./REPLFunction";
+import { REPLFunction } from "./commands/REPLFunction";
 import { CSVmap } from "./mocked/CSVMap";
 import { searchQueries } from "./mocked/searchQueries";
 
@@ -47,7 +47,7 @@ export function REPLInput(props: REPLInputProps) {
           if (!isNaN(Number(splitCommand[1]))) {
             props.setHistory([
               ...props.history,
-              searchCSVByIndex(props, splitCommand[1], searchFields[2]),
+              searchCSVByIndex(props, searchFields[1], searchFields[2]),
             ]);
           } else {
             props.setHistory([
@@ -148,4 +148,4 @@ function searchCSVByIndex(props: REPLInputProps, index: string, val: string) {
     return "Error: unable to search; no file found.";
   }
 }
-export { CSVmap };
+export { CSVmap, searchQueries };
