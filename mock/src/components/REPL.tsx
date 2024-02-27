@@ -39,6 +39,8 @@ export default function REPL() {
         functionMap={functionMap}
         file={file}
         setFile={setFile}
+        modeBrief={modeBrief}
+        setModeBrief={setModeBrief}
       />
     </div>
   );
