@@ -5,12 +5,19 @@ import { REPLFunction } from "./commands/REPLFunction";
 import { CSVmap } from "./mocked/CSVMap";
 import { searchQueries } from "./mocked/searchQueries";
 
-interface REPLInputProps {
+interface REPLInputProps extends REPLFunctionProps {
   history: string[];
   setHistory: Dispatch<SetStateAction<string[]>>;
   commandHistory: string[];
   setCommandHistory: Dispatch<SetStateAction<string[]>>;
   functionMap: Map<string, REPLFunction>;
+  file: string[][];
+  setFile: Dispatch<SetStateAction<string[][]>>;
+  modeBrief: boolean;
+  setModeBrief: Dispatch<SetStateAction<boolean>>;
+}
+
+interface REPLFunctionProps {
   file: string[][];
   setFile: Dispatch<SetStateAction<string[][]>>;
   modeBrief: boolean;
@@ -23,61 +30,22 @@ export function REPLInput(props: REPLInputProps) {
   function handleSubmit() {
     var splitCommand: string[] = commandString.split(" ");
     if (splitCommand.length != 0) {
-      if (splitCommand[0] == "load_file") {
-        var searchFields = commandString
-          .split(/<|>/)
-          .filter((val) => val != "" && val != " ")
-          .map((v) => v.trim());
-        if (searchFields.length == 2) {
-          props.setHistory([...props.history, loadCSV(props, searchFields[1])]);
-        } else {
-          props.setHistory([
-            ...props.history,
-            "Error: invalid load; incorrect number of arguments.",
-          ]);
-        }
-      } else if (commandString == "view") {
-        props.setHistory([...props.history, viewCSV(props)]);
-      } else if (splitCommand[0] == "search") {
-        var searchFields = commandString
-          .split(/<|>/)
-          .filter((val) => val != "" && val != " ")
-          .map((v) => v.trim());
-        if (searchFields.length == 3) {
-          if (!isNaN(Number(splitCommand[1]))) {
-            props.setHistory([
-              ...props.history,
-              searchCSVByIndex(props, searchFields[1], searchFields[2]),
-            ]);
-          } else {
-            props.setHistory([
-              ...props.history,
-              searchCSVByColName(props, searchFields[1], searchFields[2]),
-            ]);
-          }
-        } else {
-          props.setHistory([
-            ...props.history,
-            "Error: invalid search; incorrect number of arguments.",
-          ]);
-        }
-      } else if (splitCommand[0] == "mode") {
-        if (splitCommand[1] == "brief") {
-          props.setModeBrief(true);
-          props.setHistory([...props.history, "Mode switched to brief."]);
-        } else if (splitCommand[1] == "verbose") {
-          props.setModeBrief(false);
-          props.setHistory([...props.history, "Mode switched to verbose."]);
-        } else {
-          props.setHistory([...props.history, "Error: invalid mode switch."]);
-        }
-      } else {
-        props.setHistory([...props.history, "Error: invalid command."]);
-      }
+      var output = props.functionMap.get(splitCommand[0]) || noCommandFound;
+      props.setHistory([
+        ...props.history,
+        String(output(props, [commandString])),
+      ]);
     }
     props.setCommandHistory([...props.commandHistory, commandString]);
     setCommandString("");
   }
+
+  const noCommandFound: REPLFunction = (
+    props: REPLFunctionProps,
+    args: string[]
+  ): string => {
+    return "Error: invalid command.";
+  };
 
   return (
     <div className="repl-input">

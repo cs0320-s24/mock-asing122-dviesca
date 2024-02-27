@@ -5,6 +5,8 @@ import { CSVmap } from "../../REPLInput";
 interface REPLFunctionProps {
   file: string[][];
   setFile: Dispatch<SetStateAction<string[][]>>;
+  modeBrief: boolean;
+  setModeBrief: Dispatch<SetStateAction<boolean>>;
 }
 
 export const loadCSV: REPLFunction = (

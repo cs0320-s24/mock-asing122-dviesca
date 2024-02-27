@@ -7,6 +7,7 @@ import { addToFunctionMap } from "./commands/FunctionMap";
 import { loadCSV } from "./commands/default/LoadCSV";
 import { viewCSV } from "./commands/default/ViewCSV";
 import { searchCSV } from "./commands/default/SearchCSV";
+import { modeSwitch } from "./commands/default/Mode";
 
 export default function REPL() {
   const [history, setHistory] = useState<string[]>([]);
@@ -17,6 +18,7 @@ export default function REPL() {
   addToFunctionMap(functionMap, "load_file", loadCSV);
   addToFunctionMap(functionMap, "view", viewCSV);
   addToFunctionMap(functionMap, "search", searchCSV);
+  addToFunctionMap(functionMap, "mode", modeSwitch);
 
   return (
     <div className="repl">

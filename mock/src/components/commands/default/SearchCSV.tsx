@@ -6,6 +6,8 @@ import { searchCSVByIndex } from "./SearchCSVByIndex";
 interface REPLFunctionProps {
   file: string[][];
   setFile: Dispatch<SetStateAction<string[][]>>;
+  modeBrief: boolean;
+  setModeBrief: Dispatch<SetStateAction<boolean>>;
 }
 
 export const searchCSV: REPLFunction = (
