@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../styles/main.css";
 import { REPLHistory } from "./REPLHistory";
 import { REPLInput } from "./REPLInput";
+import { REPLFunction } from "./REPLFunction";
 
 /* 
   You'll want to expand this component (and others) for the sprints! Remember 
@@ -18,7 +19,7 @@ export default function REPL() {
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [modeBrief, setModeBrief] = useState<boolean>(true);
   const [file, setFile] = useState<string[][]>([[]]);
-  var functionMap: Map<string, () => string> = new Map();
+  var functionMap: Map<string, REPLFunction> = new Map();
 
   return (
     <div className="repl">

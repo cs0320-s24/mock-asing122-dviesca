@@ -2,13 +2,14 @@ import "../styles/main.css";
 import { Dispatch, SetStateAction, useState } from "react";
 import { ControlledInput } from "./ControlledInput";
 import { moviesCSV, tvCSV } from "./MockedJSON";
+import { REPLFunction } from "./REPLFunction";
 
-const CSVmap: Map<string, string[][]> = new Map([
+export const CSVmap: Map<string, string[][]> = new Map([
   ["movies.csv", moviesCSV],
   ["tv.csv", tvCSV],
 ]);
 
-const searchQueries: Map<string, string[][]> = new Map([
+export const searchQueries: Map<string, string[][]> = new Map([
   [
     "Movie title,Social Network",
     [["Social Network", "David Fincher", "2010", "7.8"]],
@@ -35,7 +36,7 @@ interface REPLInputProps {
   setHistory: Dispatch<SetStateAction<string[]>>;
   commandHistory: string[];
   setCommandHistory: Dispatch<SetStateAction<string[]>>;
-  functionMap: Map<string, () => string>;
+  functionMap: Map<string, REPLFunction>;
   file: string[][];
   setFile: Dispatch<SetStateAction<string[][]>>;
   modeBrief: boolean;
@@ -70,11 +71,10 @@ export function REPLInput(props: REPLInputProps) {
           .filter((val) => val != "" && val != " ")
           .map((v) => v.trim());
         if (searchFields.length == 3) {
-          var val = Number(splitCommand[1]);
-          if (!isNaN(val)) {
+          if (!isNaN(Number(splitCommand[1]))) {
             props.setHistory([
               ...props.history,
-              searchCSVByIndex(props, val, searchFields[2]),
+              searchCSVByIndex(props, splitCommand[1], searchFields[2]),
             ]);
           } else {
             props.setHistory([
@@ -169,10 +169,10 @@ function searchCSVByColName(
   }
 }
 
-function searchCSVByIndex(props: REPLInputProps, index: number, val: string) {
+function searchCSVByIndex(props: REPLInputProps, index: string, val: string) {
   if (props.file.length > 1) {
     var returnVal = "";
-    var results = searchQueries.get(index.toString() + "," + val) || [[]];
+    var results = searchQueries.get(Number(index) + "," + val) || [[]];
     results.map((row) => {
       row.map((val) => (returnVal += "##" + val));
       returnVal += "###";
