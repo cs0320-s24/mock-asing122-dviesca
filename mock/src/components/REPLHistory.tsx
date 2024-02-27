@@ -10,7 +10,7 @@ export function REPLHistory(props: REPLHistoryProps) {
     <div className="repl-history">
       {props.modeBrief
         ? props.commandHistory.map((cmd, index) =>
-            cmd == "view" ? (
+            cmd == "view" || cmd.split(" ")[0] == "search" ? (
               <table>
                 {props.history[index].split("###").map((row) => (
                   <tr>
@@ -25,7 +25,7 @@ export function REPLHistory(props: REPLHistoryProps) {
             )
           )
         : props.commandHistory.map((cmd, index) =>
-            cmd == "view" ? (
+            cmd == "view" || cmd.split(" ")[0] == "search" ? (
               <div>
                 <p>Command: {cmd}</p>
                 <p>Output:</p>
