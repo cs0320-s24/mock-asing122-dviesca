@@ -98,6 +98,8 @@ export function REPLInput(props: REPLInputProps) {
         } else {
           props.setHistory([...props.history, "Error: invalid mode switch."]);
         }
+      } else {
+        props.setHistory([...props.history, "Error: invalid command."]);
       }
     }
     props.setCommandHistory([...props.commandHistory, commandString]);
