@@ -5,12 +5,24 @@ interface REPLHistoryProps {
   commandHistory: string[];
   modeBrief: boolean;
 }
+/**
+ * This is the structure of the history of outputs and commands that will
+ * be rendered in the repl/webpage. 
+ * @param props 
+      history: an array of previous outputs as strings
+      commandHistory: String Array containing the history of executed commands
+      modeBrief: a boolean indicating whether in brief or vermbose mode
+ * @returns JSX component for the History "block"
+ */
 export function REPLHistory(props: REPLHistoryProps) {
   return (
     <div className="repl-history">
       {props.modeBrief
-        ? props.commandHistory.map((cmd, index) =>
+      //if the mode is brief
+      //maps over commands and index, checking cmd is view/search
+        ? props.commandHistory.map((cmd, index) => 
             cmd == "view" || cmd.split(" ")[0] == "search" ? (
+              // Renders the commands in a table
               <table>
                 {props.history[index].split("###").map((row) => (
                   <tr>
@@ -24,6 +36,7 @@ export function REPLHistory(props: REPLHistoryProps) {
               <p>{props.history[index]}</p>
             )
           )
+        // IF VERBOSE
         : props.commandHistory.map((cmd, index) =>
             cmd == "view" || cmd.split(" ")[0] == "search" ? (
               <div>
