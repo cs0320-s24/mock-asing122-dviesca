@@ -36,7 +36,7 @@ export function REPLHistory(props: REPLHistoryProps) {
               <p>{props.history[index]}</p>
             )
           )
-        // IF VERBOSE
+        // IF VERBOSE, same as above with added verbose fields displayed
         : props.commandHistory.map((cmd, index) =>
             cmd == "view" || cmd.split(" ")[0] == "search" ? (
               <div>

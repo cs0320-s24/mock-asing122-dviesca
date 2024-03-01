@@ -4,8 +4,9 @@ import { ControlledInput } from "./ControlledInput";
 import { REPLFunction } from "./commands/REPLFunction";
 
 /**
- * history: an array of previous outputs as strings
-  *  setHistory: function to update history
+ *  REPLInputProps: props used for the handle function
+  * history: an array of previous outputs as strings
+  * setHistory: function to update history
   * commandHistory: String Array containing the history of executed commands
   * setCommandHistory: function to update commandHistory
   * functionMap: a map from strings to functions for supported commands  
@@ -26,6 +27,7 @@ interface REPLInputProps extends REPLFunctionProps {
 }
 
 /**
+ * REPLFunctionProps: props used when command is not found
  * file: the CSV file being operated on
  * setFile: function to update file
  * modeBrief: a boolean indicating whether in brief or vermbose mode

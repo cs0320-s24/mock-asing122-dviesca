@@ -2,6 +2,12 @@ import { Dispatch, SetStateAction } from "react";
 import { REPLFunction } from "../REPLFunction";
 import { CSVmap } from "../../mocked/CSVMap";
 
+/**
+ * REPLFunctionProps: generalized props for a function used in repl
+  * file: the CSV file being operated on
+  * modeBrief: a boolean indicating whether in brief or vermbose mode
+  * setModeBrief: function to update modeBrief
+ */
 interface REPLFunctionProps {
   file: string[][];
   setFile: Dispatch<SetStateAction<string[][]>>;
@@ -9,6 +15,13 @@ interface REPLFunctionProps {
   setModeBrief: Dispatch<SetStateAction<boolean>>;
 }
 
+/**
+ * Definition of the specific replfunction LoadCSV that loads/stages a csv
+ * from a string filepath to be used in other functions
+ * @param props REPLFunctionProps defined above
+ * @param args 
+ * @returns 
+ */
 export const loadCSV: REPLFunction = (
   props: REPLFunctionProps,
   args: string[]
@@ -32,3 +45,5 @@ export const loadCSV: REPLFunction = (
   }
   return "Error: invalid load; incorrect number of arguments.";
 };
+
+
