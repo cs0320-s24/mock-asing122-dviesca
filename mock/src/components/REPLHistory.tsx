@@ -18,9 +18,9 @@ export function REPLHistory(props: REPLHistoryProps) {
   return (
     <div className="repl-history">
       {props.modeBrief
-      //if the mode is brief
-      //maps over commands and index, checking cmd is view/search
-        ? props.commandHistory.map((cmd, index) => 
+        ? //if the mode is brief
+          //maps over commands and index, checking cmd is view/search
+          props.commandHistory.map((cmd, index) =>
             cmd == "view" || cmd.split(" ")[0] == "search" ? (
               // Renders the commands in a table
               <table>
@@ -36,8 +36,8 @@ export function REPLHistory(props: REPLHistoryProps) {
               <p>{props.history[index]}</p>
             )
           )
-        // IF VERBOSE, same as above with added verbose fields displayed
-        : props.commandHistory.map((cmd, index) =>
+        : // IF VERBOSE, same as above with added verbose fields displayed
+          props.commandHistory.map((cmd, index) =>
             cmd == "view" || cmd.split(" ")[0] == "search" ? (
               <div>
                 <p>Command: {cmd}</p>
