@@ -11,6 +11,7 @@
 
 .repl-history {
   height: 55vh;
+  width: 50%;
   margin: auto;
   display: block;
   overflow: scroll;
