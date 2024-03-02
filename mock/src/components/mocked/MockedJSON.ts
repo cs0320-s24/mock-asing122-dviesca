@@ -14,3 +14,9 @@ export const tvCSV = [
   ["Succession", "2018", "2023"],
   ["Diplomat", "2023", "-"],
 ];
+
+export const oneRow = [["aa", "bb", "cc", "dd"]];
+
+export const oneCol = [["aa"], ["bb"], ["cc"], ["dd"]];
+
+export const empty = [[]];

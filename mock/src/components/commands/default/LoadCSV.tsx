@@ -46,5 +46,3 @@ export const loadCSV: REPLFunction = (
   }
   return "Error: invalid load; incorrect number of arguments.";
 };
-
-

@@ -43,8 +43,6 @@ test('loading file outside protected directory', async ({ page }) => {
     expect(errorMessage).toContain('Error: invalid load; unable to go outside protected directory');
     });
 
-
-
 test('test subsequent invalid file after loading retention', async ({ page }) => {
   await page.goto('http://localhost:8000/');
   await page.getByLabel('Login').click();
@@ -63,3 +61,9 @@ test('test subsequent invalid file after loading retention', async ({ page }) =>
   //await page.getByText('Movie titleDirectorYearIMDBSocial NetworkDavid Fincher20107.8Eternal Sunshine').click();
   //await page.getByRole('cell', { name: 'Error: unable to view; no' }).click();
 });
+test('test loading an empty csv', async ({ page }) => {
+  await page.getByPlaceholder('Enter command here!').click();
+  await page.getByPlaceholder('Enter command here!').fill('load_file <empty.csv>');
+  await page.getByRole('button', { name: 'Submit' }).click();
+  await expect(page.getByText('Error: unable to load file;')).toBeVisible();
+})

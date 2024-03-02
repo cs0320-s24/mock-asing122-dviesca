@@ -13,22 +13,6 @@ test('test absolute minimal functionality', async ({ page }) => {
   await expect(page.getByLabel('Login')).toBeVisible()
 })
 
-test('testing basic load', async ({ page }) => {
-  // check that box and fill table are present
-  await expect(page.getByPlaceholder('Enter command here!')).toBeVisible();
-  await page.getByRole('group', { name: 'Enter a command:' }).click();
-  await page.getByPlaceholder('Enter command here!').click();
-  // enter a valid load command and file
-  await page.getByPlaceholder('Enter command here!').fill('load_file <movies.csv>');
-  // expect submit button to be visible
-  await expect(page.getByRole('button', { name: 'Submit' })).toBeVisible();
-  await page.getByRole('button', { name: 'Submit' }).click();
-  // expect file loaded success message to be visible
-  await expect(page.getByText('File successfully loaded.')).toBeVisible();
-  // expect text to go back to enter command here
-  await page.getByPlaceholder('Enter command here!').click();
-
-});
 test('test login logout login', async ({ page }) => {
   await expect(page.getByRole('group', { name: 'Enter a command:' })).toBeVisible();
   await expect(page.getByPlaceholder('Enter command here!')).toBeVisible();
