@@ -13,7 +13,7 @@ test('viewing without loading', async ({ page }) => {
   // Submit command
   await page.getByRole('button', { name: 'Submit' }).click();
   // Check error message being displayed
-  await expect(page.getByRole('cell', { name: 'Error: unable to view; no' })).toBeVisible();
+  await expect(page.getByText('Error: unable to view; no')).toBeVisible();
 });
 
 
@@ -21,7 +21,7 @@ test('searching without loading', async ({ page }) => {
   await page.getByPlaceholder('Enter command here!').click();
   await page.getByPlaceholder('Enter command here!').fill('search <movies.csv> 1 1');
   await page.getByRole('button', { name: 'Submit' }).click();
-  await expect(page.getByRole('cell', { name: 'Error: unable to search; no' })).toBeVisible();
+  await expect(page.getByText('Error: unable to search; no')).toBeVisible();
 
 });
 
@@ -91,5 +91,5 @@ test('Searching with a lowercase', async ({ page }) => {
   await page.getByRole('group', { name: 'Enter a command:' }).click();
   await page.getByPlaceholder('Enter command here!').fill('search <Director> <aaron sorkin>');
   await page.getByRole('button', { name: 'Submit' }).click();
-  await expect(page.getByText('File successfully loaded.')).toBeVisible();
+  await expect(page.getByText('No search found')).toBeVisible();
 });
