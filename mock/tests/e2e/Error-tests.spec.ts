@@ -93,3 +93,40 @@ test('Searching with a lowercase', async ({ page }) => {
   await page.getByRole('button', { name: 'Submit' }).click();
   await expect(page.getByText('No search found')).toBeVisible();
 });
+
+
+test('inccorrect number of args load', async ({ page }) => {
+    await page.getByRole('group', { name: 'Enter a command:' }).click();
+    await page.getByPlaceholder('Enter command here!').fill('load_file <1> <bv> <1>');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await expect(page.getByText('Error: invalid load;')).toBeVisible();
+  });
+
+  test('inccorrect number of args view', async ({ page }) => {
+    await page.getByPlaceholder('Enter command here!').click();
+  await page.getByPlaceholder('Enter command here!').fill('load_file <movies.csv>');
+  await page.getByRole('button', { name: 'Submit' }).click();
+  await page.getByPlaceholder('Enter command here!').click();
+  await page.getByPlaceholder('Enter command here!').fill('view 1');
+  await page.getByRole('button', { name: 'Submit' }).click();
+  await page.getByText('Error: unable to view;').click();
+  await expect(page.getByText('Error: unable to view;')).toBeVisible();
+
+
+  });
+
+
+  test('inccorrect number of args search', async ({ page }) => {
+    await page.getByPlaceholder('Enter command here!').click();
+    await page.getByPlaceholder('Enter command here!').fill('load_file <movies.csv>');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await page.getByPlaceholder('Enter command here!').click();
+    await page.getByPlaceholder('Enter command here!').fill('view 1');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await page.getByText('Error: unable to view;').click();
+    await page.getByPlaceholder('Enter command here!').click();
+    await page.getByPlaceholder('Enter command here!').fill('search');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await expect(page.getByText('Error: invalid search;')).toBeVisible();
+  });
+
