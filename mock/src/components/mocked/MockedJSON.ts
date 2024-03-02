@@ -1,3 +1,8 @@
+/**
+ * moviesCSV
+ *
+ * Mocked CSV data for movies.
+ */
 export const moviesCSV = [
   ["Movie title", "Director", "Year", "IMDB"],
   ["Social Network", "David Fincher", "2010", "7.8"],
@@ -7,6 +12,11 @@ export const moviesCSV = [
   ["The Trial of the Chicago 7", "Aaron Sorkin", "2020", "7.7"],
 ];
 
+/**
+ * tvCSV
+ *
+ * Mocked CSV data for TV shows.
+ */
 export const tvCSV = [
   ["TV show", "Year started", "Year ended"], // '-' for ongoing shows
   ["Seinfeld", "1989", "1998"],

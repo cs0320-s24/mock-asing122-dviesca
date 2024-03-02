@@ -16,7 +16,10 @@ interface REPLFunctionProps {
 }
 
 /**
+ * viewCSV Function
+ *
  * Shorthand for LoadCSV that loads movie.csv
+ *
  * @param props REPLFunctionProps defined above
  * @param args
  * @returns a react component for the input block and submit button after a
