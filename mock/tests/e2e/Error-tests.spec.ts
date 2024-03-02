@@ -80,5 +80,16 @@ test('Searching by column num outside bounds', async ({ page }) => {
   await page.getByPlaceholder('Enter command here!').fill('search <2000> <2004>');
   await page.getByRole('button', { name: 'Submit' }).click();
   await expect(page.getByText('File successfully loaded.')).toBeVisible();
-//TODO INSERT ERROR MESSAGE
+});
+
+test('Searching with a lowercase', async ({ page }) => {
+  await page.goto('http://localhost:8000/');
+  await page.getByLabel('Login').click();
+  await page.getByPlaceholder('Enter command here!').click();
+  await page.getByPlaceholder('Enter command here!').fill('load_file <movies.csv>');
+  await page.getByRole('button', { name: 'Submit' }).click();
+  await page.getByRole('group', { name: 'Enter a command:' }).click();
+  await page.getByPlaceholder('Enter command here!').fill('search <Director> <aaron sorkin>');
+  await page.getByRole('button', { name: 'Submit' }).click();
+  await expect(page.getByText('File successfully loaded.')).toBeVisible();
 });

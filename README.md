@@ -23,6 +23,10 @@
     take in a string from input and return corresponding command components in
     the default package like loadCSV SearchCSV, ViewCSV etc.
 
+    Particular choices: We chose to make search case sensitive, as many cases
+    such as hashes/usernames/passwords are often case sensitive and thus it is
+    most flexible/safe to assume the user is being as well.
+
 
 
 ## Data structures used, why you created it, and other high level explanations:

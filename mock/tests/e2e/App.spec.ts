@@ -250,6 +250,29 @@ test('Searching by column name', async ({ page }) => {
   await expect(page.getByRole('cell', { name: '7.7' })).toBeVisible();
 });
 
+
+test('Searching by column name in lowercase', async ({ page }) => {
+  await page.goto('http://localhost:8000/');
+  await page.getByLabel('Login').click();
+  await page.getByPlaceholder('Enter command here!').click();
+  await page.getByPlaceholder('Enter command here!').fill('load_file <movies.csv>');
+  await page.getByRole('button', { name: 'Submit' }).click();
+  await page.getByRole('group', { name: 'Enter a command:' }).click();
+  await page.getByPlaceholder('Enter command here!').fill('search <Director> <Aaron Sorkin>');
+  await page.getByRole('button', { name: 'Submit' }).click();
+  await expect(page.getByText('File successfully loaded.')).toBeVisible();
+  await expect(page.getByText('Molly\'s GameAaron Sorkin20177.4The Trial of the Chicago 7Aaron Sorkin20207.7')).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'Molly\'s Game' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'Aaron Sorkin' }).first()).toBeVisible();
+  await expect(page.getByRole('cell', { name: '2017' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '7.4' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'The Trial of the Chicago' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'Aaron Sorkin' }).nth(1)).toBeVisible();
+  await expect(page.getByRole('cell', { name: '2020' })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '7.7' })).toBeVisible();
+});
+
+
 // //SEARCHCSVBYCOLINDEX
 // //TODO:
 // test('TODO2', async ({ page }) => {
