@@ -5,6 +5,7 @@ import { CSVmap } from "../../mocked/CSVMap";
 /**
  * REPLFunctionProps: generalized props for a function used in repl
  * file: the CSV file being operated on
+ * setFile: function to update file
  * modeBrief: a boolean indicating whether in brief or vermbose mode
  * setModeBrief: function to update modeBrief
  */
