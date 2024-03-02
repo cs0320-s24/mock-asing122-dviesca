@@ -3,6 +3,10 @@ import "../styles/App.css";
 import { LoginButton } from "./LoginButton";
 import REPL from "./REPL";
 
+/**
+ * This is code for the app that is rendered in the browser.
+ * @returns The main App component.
+ */
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
