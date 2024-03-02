@@ -20,7 +20,8 @@ interface REPLFunctionProps {
  * from a string filepath to be used in other functions
  * @param props REPLFunctionProps defined above
  * @param args 
- * @returns 
+ * @returns a react component for the input block and submit button after a 
+ *          load command is executed
  */
 export const loadCSV: REPLFunction = (
   props: REPLFunctionProps,

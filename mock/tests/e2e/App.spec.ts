@@ -54,20 +54,3 @@ test('after I type into the input box, its text changes', async ({ page }) => {
   const mock_input = `Awesome command`
   await expect(page.getByLabel('Command input')).toHaveValue(mock_input)
 });
-
-
-///------------------------------------------------------------------------------------------
-
-
-
-test('on page load, i see a button', async ({ page }) => {
-  // TODO WITH TA: Fill this in!
-});
-
-test('after I click the button, its label increments', async ({ page }) => {
-  // TODO WITH TA: Fill this in to test your button counter functionality!
-});
-
-test('after I click the button, my command gets pushed', async ({ page }) => {
-  // TODO: Fill this in to test your button push functionality!
-});
