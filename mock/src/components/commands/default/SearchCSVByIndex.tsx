@@ -14,9 +14,9 @@ export const searchCSVByIndex: REPLFunction = (
   args: string[]
 ): string => {
   if (props.file.length > 1) {
-    if (parseInt(args[0]) < 0 || parseInt(args[0]) > props.file[0].length) {
+    if (Number(args[0]) > 0 && Number(args[0]) < props.file[0].length) {
       var returnVal = "";
-      var results = searchQueries.get(Number(args[0]) + "," + args[1]) || [[]];
+      var results = searchQueries.get(args[0] + "," + args[1]) || [[]];
       results.map((row) => {
         row.map((val) => (returnVal += "##" + val));
         returnVal += "###";

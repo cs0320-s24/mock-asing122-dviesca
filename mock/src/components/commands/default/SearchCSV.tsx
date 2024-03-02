@@ -19,7 +19,7 @@ export const searchCSV: REPLFunction = (
     .filter((val) => val != "" && val != " ")
     .map((v) => v.trim());
   if (searchFields.length == 3) {
-    if (!isNaN(Number(args[0]))) {
+    if (!isNaN(Number(searchFields[1]))) {
       return String(
         searchCSVByIndex(props, [searchFields[1], searchFields[2]])
       );
