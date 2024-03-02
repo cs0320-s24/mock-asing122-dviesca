@@ -5,11 +5,9 @@ import { REPLInput } from "./REPLInput";
 import { REPLFunction } from "./commands/REPLFunction";
 import { addToFunctionMap, defaultFunctionMap } from "./commands/FunctionMap";
 
-
-
 /**
  * This is code for the read eval print loop that includes within itself
- * the structure for page elements such as the history. 
+ * the structure for page elements such as the history.
  * The page work in two modes: brief or verbose, starting in brief
  * @returns a JSX/react component that represents the UI of the page
  */
