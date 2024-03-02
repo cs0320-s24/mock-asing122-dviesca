@@ -36,11 +36,10 @@ export const searchCSVByColName: REPLFunction = (
       row.map((val) => (returnVal += "##" + val));
       returnVal += "###";
     });
-    if (returnVal === "") {
-      return "Error, search not found";
-    } else {
-    return returnVal;
+    if (returnVal == "###") {
+      return "No search found.";
     }
+    return returnVal;
   } else {
     return "Error: unable to search; no file found.";
   }

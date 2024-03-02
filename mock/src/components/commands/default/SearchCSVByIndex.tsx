@@ -37,12 +37,10 @@ export const searchCSVByIndex: REPLFunction = (
         row.map((val) => (returnVal += "##" + val));
         returnVal += "###";
       });
-      if(returnVal ===""){
-      return "Error, search not found";
+      if (returnVal == "###") {
+        return "No search found.";
       }
-      else{
-        return returnVal; 
-      }
+      return returnVal;
     } else {
       return "Error: unable to search; index out of bounds";
     }
