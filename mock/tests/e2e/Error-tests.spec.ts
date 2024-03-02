@@ -69,7 +69,7 @@ test('test loading an empty csv', async ({ page }) => {
 })
 
 //searching for a column that is beyond the index
-test('Searching by column num', async ({ page }) => {
+test('Searching by column num outside bounds', async ({ page }) => {
   await page.goto('http://localhost:8000/');
   await page.getByLabel('Login').click();
   await page.getByPlaceholder('Enter command here!').click();
@@ -79,5 +79,6 @@ test('Searching by column num', async ({ page }) => {
   await page.getByPlaceholder('Enter command here!').click();
   await page.getByPlaceholder('Enter command here!').fill('search <2000> <2004>');
   await page.getByRole('button', { name: 'Submit' }).click();
+  await expect(page.getByText('File successfully loaded.')).toBeVisible();
 //TODO INSERT ERROR MESSAGE
 });

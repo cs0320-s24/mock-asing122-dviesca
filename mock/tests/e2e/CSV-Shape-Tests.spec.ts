@@ -6,7 +6,6 @@ test.beforeEach(async ({ page }) => {
 });
 
 test('test regular on verbose', async ({ page }) => { 
-    await page.getByLabel('Login').click();
     await page.getByPlaceholder('Enter command here!').click();
     await page.getByPlaceholder('Enter command here!').fill('load_file <movies.csv>');
     await page.getByRole('button', { name: 'Submit' }).click();
