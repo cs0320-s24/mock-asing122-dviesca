@@ -14,13 +14,17 @@ export const searchCSVByIndex: REPLFunction = (
   args: string[]
 ): string => {
   if (props.file.length > 1) {
-    var returnVal = "";
-    var results = searchQueries.get(Number(args[0]) + "," + args[1]) || [[]];
-    results.map((row) => {
-      row.map((val) => (returnVal += "##" + val));
-      returnVal += "###";
-    });
-    return returnVal;
+    if (parseInt(args[0]) < 0 || parseInt(args[0]) > props.file[0].length) {
+      var returnVal = "";
+      var results = searchQueries.get(Number(args[0]) + "," + args[1]) || [[]];
+      results.map((row) => {
+        row.map((val) => (returnVal += "##" + val));
+        returnVal += "###";
+      });
+      return returnVal;
+    } else {
+      return "Error: unable to search; index out of bounds";
+    }
   } else {
     return "Error: unable to search; no file found.";
   }
