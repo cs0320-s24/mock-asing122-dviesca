@@ -25,8 +25,6 @@ export const tvCSV = [
   ["Diplomat", "2023", "-"],
 ];
 
-export const oneRow = [["aa", "bb", "cc", "dd"]];
-
 export const oneCol = [["aa"], ["bb"], ["cc"], ["dd"]];
 
 export const empty = [[]];

@@ -1,4 +1,4 @@
-import { moviesCSV, tvCSV, empty, oneCol, oneRow } from "./MockedJSON";
+import { moviesCSV, tvCSV, empty, oneCol } from "./MockedJSON";
 
 /**
  * CSVmap
@@ -13,5 +13,4 @@ export const CSVmap: Map<string, string[][]> = new Map([
   ["tv.csv", tvCSV],
   ["empty.csv", empty],
   ["oneCol.csv", oneCol],
-  ["oneRow.csv", oneRow],
 ]);

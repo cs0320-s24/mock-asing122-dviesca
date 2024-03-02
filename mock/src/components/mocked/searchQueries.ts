@@ -22,4 +22,12 @@ export const searchQueries: Map<string, string[][]> = new Map([
   ["TV show,Succession", [["Succession", "2018", "2023"]]],
   ["TV show,Diplomat", [["Diplomat", "2023", "-"]]],
   ["Year ended,-", [["Diplomat", "2023", "-"]]],
-]);
+  [
+    "aa,bb",
+    [
+      ["bb"],
+    ],
+  ],
+],
+
+);

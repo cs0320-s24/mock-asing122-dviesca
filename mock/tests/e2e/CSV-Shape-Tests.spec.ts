@@ -36,6 +36,65 @@ test('test regular on verbose', async ({ page }) => {
 })
 
 
-  test('test single col on verbose', async ({ page }) => { 
+  test('test single col verbose', async ({ page }) => { 
+    await page.getByPlaceholder('Enter command here!').click();
+    await page.getByPlaceholder('Enter command here!').fill('load_file <oneCol>');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await page.getByPlaceholder('Enter command here!').click();
+    await page.getByPlaceholder('Enter command here!').fill('load_file <oneCol.csv>');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await page.getByPlaceholder('Enter command here!').click();
+    await page.getByPlaceholder('Enter command here!').fill('view');
+    await expect(page.getByText('File successfully loaded.')).toBeVisible();
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await expect(page.getByText('aabbccdd')).toBeVisible();
+    await expect(page.getByRole('cell', { name: 'aa' })).toBeVisible();
+    await expect(page.getByRole('cell', { name: 'bb' })).toBeVisible();
+    await expect(page.getByRole('cell', { name: 'cc' })).toBeVisible();
+    await expect(page.getByRole('cell', { name: 'dd' })).toBeVisible();
+    await page.getByPlaceholder('Enter command here!').click();
+    await page.getByPlaceholder('Enter command here!').fill('mode verbose');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await expect(page.getByText('Command: load_file <oneCol.')).toBeVisible();
+    await expect(page.getByText('Command: view')).toBeVisible();
+    await expect(page.getByText('Output:', { exact: true })).toBeVisible();
+})
+
+
+  test('test single col on search', async ({ page }) => {
+    await page.getByPlaceholder('Enter command here!').click();
+    await page.getByPlaceholder('Enter command here!').fill('load_file <oneCol.csv>');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await page.getByPlaceholder('Enter command here!').click();
+    await page.getByPlaceholder('Enter command here!').fill('mode brief');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await page.getByPlaceholder('Enter command here!').click();
+    await page.getByPlaceholder('Enter command here!').fill('search <aa> <bb>');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await expect(page.getByRole('cell', { name: 'bb' })).toBeVisible();
+    await expect(page.getByRole('table')).toBeVisible();
+})
+
+  test('test single col with view and search', async ({ page }) => {
+    await page.getByPlaceholder('Enter command here!').click();
+    await page.getByPlaceholder('Enter command here!').fill('load_file <oneCol.csv>');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await page.getByPlaceholder('Enter command here!').click();
+    await page.getByPlaceholder('Enter command here!').fill('mode brief');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await page.getByPlaceholder('Enter command here!').click();
+    await page.getByPlaceholder('Enter command here!').fill('search <aa> <bb>');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await expect(page.getByRole('cell', { name: 'bb' })).toBeVisible();
+    await expect(page.getByRole('table')).toBeVisible();
+    await page.getByPlaceholder('Enter command here!').click();
+    await page.getByPlaceholder('Enter command here!').fill('view');
+    await page.getByRole('button', { name: 'Submit' }).click();
+    await expect(page.getByText('aabbccdd')).toBeVisible();
+    await expect(page.getByRole('cell', { name: 'aa' })).toBeVisible();
+    await expect(page.getByRole('cell', { name: 'bb' }).nth(1)).toBeVisible();
+    await expect(page.getByRole('cell', { name: 'cc' })).toBeVisible();
+    await expect(page.getByRole('cell', { name: 'dd' })).toBeVisible();
 
 })
+
