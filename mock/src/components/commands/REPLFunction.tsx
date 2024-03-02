@@ -2,9 +2,9 @@ import { Dispatch, SetStateAction } from "react";
 
 /**
  * REPLFunctionProps: generalized props for a function used in repl
-  * file: the CSV file being operated on
-  * modeBrief: a boolean indicating whether in brief or vermbose mode
-  * setModeBrief: function to update modeBrief
+ * file: the CSV file being operated on
+ * modeBrief: a boolean indicating whether in brief or vermbose mode
+ * setModeBrief: function to update modeBrief
  */
 interface REPLFunctionProps {
   file: string[][];

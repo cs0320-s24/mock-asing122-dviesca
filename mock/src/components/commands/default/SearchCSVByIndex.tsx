@@ -2,6 +2,13 @@ import { Dispatch, SetStateAction } from "react";
 import { REPLFunction } from "../REPLFunction";
 import { searchQueries } from "../../mocked/searchQueries";
 
+/**
+ * REPLFunctionProps: generalized props for a function used in repl
+ * file: the CSV file being operated on
+ * setFile: function to update file
+ * modeBrief: a boolean indicating whether in brief or vermbose mode
+ * setModeBrief: function to update modeBrief
+ */
 interface REPLFunctionProps {
   file: string[][];
   setFile: Dispatch<SetStateAction<string[][]>>;
@@ -9,6 +16,15 @@ interface REPLFunctionProps {
   setModeBrief: Dispatch<SetStateAction<boolean>>;
 }
 
+/**
+ * searchCSVByIndex Function
+ *
+ * Function to search CSV data by index.
+ *
+ * @param props - The props object containing file, setFile, modeBrief, and setModeBrief.
+ * @param args - The arguments passed to the function.
+ * @returns A string representing the searched data or an error message.
+ */
 export const searchCSVByIndex: REPLFunction = (
   props: REPLFunctionProps,
   args: string[]

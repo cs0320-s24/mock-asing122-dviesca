@@ -4,9 +4,10 @@ import { CSVmap } from "../../mocked/CSVMap";
 
 /**
  * REPLFunctionProps: generalized props for a function used in repl
-  * file: the CSV file being operated on
-  * modeBrief: a boolean indicating whether in brief or vermbose mode
-  * setModeBrief: function to update modeBrief
+ * file: the CSV file being operated on
+ * setFile: function to update file
+ * modeBrief: a boolean indicating whether in brief or vermbose mode
+ * setModeBrief: function to update modeBrief
  */
 interface REPLFunctionProps {
   file: string[][];
@@ -19,8 +20,8 @@ interface REPLFunctionProps {
  * Definition of the specific replfunction LoadCSV that loads/stages a csv
  * from a string filepath to be used in other functions
  * @param props REPLFunctionProps defined above
- * @param args 
- * @returns a react component for the input block and submit button after a 
+ * @param args
+ * @returns a react component for the input block and submit button after a
  *          load command is executed
  */
 export const loadCSV: REPLFunction = (
